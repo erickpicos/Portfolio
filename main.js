@@ -19,7 +19,7 @@ camera.lookAt(0, 0, 0);
 var renderer = new THREE.WebGLRenderer({antialias:false});
 
 renderer.setSize(div.offsetWidth, div.offsetHeight + 100);
-renderer.setPixelRatio(ratio);
+renderer.setPixelRatio(window.devicePixelRatio);
 document.getElementById('threed').appendChild(renderer.domElement);
 renderer.gammaInput = false; renderer.gammaOutput = false;
 renderer.render(scene, camera);
@@ -337,6 +337,7 @@ var planeAspectRatio = 1;
 window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize( event ) {
+  console.log("Resoze");
 
   camera.aspect = div.offsetWidth / (div.offsetHeight + 100);
   if(camera.aspect > planeAspectRatio){
@@ -356,14 +357,6 @@ function onWindowResize( event ) {
 
 }
 onWindowResize();
-
-function OnRseiz(){
-  console.log("entre");
-  onWindowResize();
-}
-
-const resizeObserver = new ResizeObserver(OnRseiz);
-resizeObserver.observe(renderer.domElement, {box: 'content-box'});
 
 
 
