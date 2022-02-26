@@ -353,6 +353,13 @@ function onWindowResize( event ) {
 }
 onWindowResize();
 
+function OnRseiz(){
+  console.log("entre");
+  onWindowResize();
+}
+
+const resizeObserver = new ResizeObserver(OnRseiz);
+resizeObserver.observe(renderer.domElement, {box: 'content-box'});
 
 
 
