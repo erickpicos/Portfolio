@@ -287,6 +287,7 @@ function animate() {
     if(groupStarB.rotation.y >= Math.PI*2 || groupStarB.rotation.y <= -Math.PI*2 ){ groupStarB.rotation.y =0;}
   */
 
+  resizeCanvasToDisplaySize();
 
   renderer.render(scene, camera);
 }
@@ -354,6 +355,22 @@ function onWindowResize( event ) {
 }
 onWindowResize();
 
+function resizeCanvasToDisplaySize() {
+  const canvas = renderer.domElement;
+  // look up the size the canvas is being displayed
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  // adjust displayBuffer size to match
+  if (canvas.width !== width || canvas.height !== height) {
+    // you must pass false here or three.js sadly fights the browser
+    renderer.setSize(width, height, false);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    // update any render target sizes here
+  }
+}
 
 
 
