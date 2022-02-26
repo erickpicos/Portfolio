@@ -8,15 +8,17 @@ var Vector3 = THREE.Vector3;
 var scene = new THREE.Scene();
 scene.background = new THREE.Color(0x320000);
 
+var div = document.getElementById('threed');
+var ratio = div.offsetWidth /  (div.offsetHeight + 100);
+
 // camera and renderer
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);//32, 600);
+const camera = new THREE.PerspectiveCamera(75, ratio, 0.1, 1000);//32, 600);
 camera.position.set(0, 0, 10);
 camera.lookAt(0, 0, 0);
 
 var renderer = new THREE.WebGLRenderer({antialias:false});
-var div = document.getElementById('threed');
-renderer.setSize(div.offsetWidth, div.offsetHeight);
-var ratio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+
+renderer.setSize(div.offsetWidth, div.offsetHeight + 100);
 renderer.setPixelRatio(ratio);
 document.getElementById('threed').appendChild(renderer.domElement);
 renderer.gammaInput = false; renderer.gammaOutput = false;
@@ -288,8 +290,6 @@ function animate() {
     if(groupStarB.rotation.y >= Math.PI*2 || groupStarB.rotation.y <= -Math.PI*2 ){ groupStarB.rotation.y =0;}
   */
 
-  renderer.setSize(div.offsetWidth, div.offsetHeight);
-
   renderer.render(scene, camera);
 }
 animate();
@@ -331,14 +331,14 @@ ScrollAnimation();
 
 //Resize
 var tanFOV = Math.tan( ( ( Math.PI / 180 ) * camera.fov / 2 ) );
-var windowHeight = window.innerHeight;
+var windowHeight = div.offsetHeight + 100;
 var planeAspectRatio = 1;
 
 window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize( event ) {
 
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = div.offsetWidth / (div.offsetHeight + 100);
   if(camera.aspect > planeAspectRatio){
     _hero.position.set(4,0,0);
   }else{
@@ -346,12 +346,12 @@ function onWindowResize( event ) {
   }
 
   // adjust the FOV
-  camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / windowHeight ) );
+  camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( (div.offsetHeight + 100) / windowHeight ) );
 
   camera.updateProjectionMatrix();
 //  camera.lookAt( scene.position );
   //renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setSize(div.offsetWidth, div.offsetHeight);
+  renderer.setSize(div.offsetWidth, div.offsetHeight+100);
   renderer.render( scene, camera );
 
 }
