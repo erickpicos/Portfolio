@@ -14,7 +14,8 @@ camera.position.set(0, 0, 10);
 camera.lookAt(0, 0, 0);
 
 var renderer = new THREE.WebGLRenderer({antialias:false});
-renderer.setSize(window.innerWidth, window.innerHeight);
+var div = document.getElementById('threed');
+renderer.setSize(div.offsetWidth, div.offsetHeight);
 var ratio = window.devicePixelRatio ? window.devicePixelRatio : 1;
 renderer.setPixelRatio(ratio);
 document.getElementById('threed').appendChild(renderer.domElement);
@@ -347,7 +348,8 @@ function onWindowResize( event ) {
 
   camera.updateProjectionMatrix();
 //  camera.lookAt( scene.position );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  //renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize(div.offsetWidth, div.offsetHeight);
   renderer.render( scene, camera );
 
 }
