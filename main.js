@@ -288,6 +288,8 @@ function animate() {
     if(groupStarB.rotation.y >= Math.PI*2 || groupStarB.rotation.y <= -Math.PI*2 ){ groupStarB.rotation.y =0;}
   */
 
+  renderer.setSize(div.offsetWidth, div.offsetHeight);
+
   renderer.render(scene, camera);
 }
 animate();
@@ -330,7 +332,7 @@ ScrollAnimation();
 //Resize
 var tanFOV = Math.tan( ( ( Math.PI / 180 ) * camera.fov / 2 ) );
 var windowHeight = window.innerHeight;
-const planeAspectRatio = 1;
+var planeAspectRatio = 1;
 
 window.addEventListener( 'resize', onWindowResize, false );
 
